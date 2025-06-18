@@ -8,12 +8,12 @@ export default function Subheader() {
      <section className="flex flex-col md:flex-row justify-between items-center px-12 mt-16 gap-12">
         <div className="max-w-xl">
           <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
-            <span className="text-yellow-100">CodeWave —</span> <br />мощь веб-решений
+            <span className="text-yellow-500/25 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">CodeWave —</span> <br />мощь веб-решений
           </h1>
           <p className="text-lg text-neutral-300 mb-8">
             Создаем современные и эффективные веб-сайты и приложения, которые двигают бизнес вперед.
           </p>
-          <button className="px-8 py-3 border border-yellow-200 rounded-lg text-lg font-medium text-yellow-100 hover:bg-yellow-100 hover:text-[#0a0e1a] transition cursor-pointer">
+          <button className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25">
             Создать сайт мечты
           </button>
         </div>

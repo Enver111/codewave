@@ -8,8 +8,7 @@ interface TechnologyCardProps {
   }
 
 export const TechnologyCard = ({ name, description, icon, category }: TechnologyCardProps) => (
-	<div className="group relative bg-[#10182a] rounded-xl p-8 hover:bg-[#1a2540] transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1">
-	  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+	<div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:-translate-y-1">
 	  <div className="relative">
 		<div className="flex items-center gap-6 mb-6">
 		  <div className="w-16 h-16 relative bg-[#1a2540] rounded-xl p-3 group-hover:bg-[#2a3550] transition-colors duration-300">
