@@ -21,6 +21,7 @@ export default function Home() {
         <Price />
         <Contacts />
         <Footer />
+
       </main>
     </div>
   );
