@@ -10,7 +10,7 @@ interface PortfolioCardProps {
 }
 
 export const PortfolioCard = ({ title, description, image, category, link }: PortfolioCardProps) => (
-  <div className="group relative bg-[#10182a] rounded-xl overflow-hidden hover:bg-[#1a2540] transition-all duration-300">
+  <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden hover:border-yellow-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:-translate-y-1">
     <div className="relative h-64 overflow-hidden">
       <Image
         src={image}
@@ -21,15 +21,15 @@ export const PortfolioCard = ({ title, description, image, category, link }: Por
       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] to-transparent opacity-60" />
     </div>
     <div className="p-6">
-      <div className="text-sm text-yellow-100 mb-2">{category}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <div className="text-sm text-yellow-100 mb-2 bg-yellow-500/10 px-3 py-1 rounded-full inline-block">{category}</div>
+      <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
       <p className="text-neutral-300 mb-4">{description}</p>
       <Link
         href={link}
-        className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+        className="inline-flex items-center gap-2 text-blue-400 hover:text-yellow-200 transition-colors group/link"
       >
         Подробнее
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover/link:translate-x-1">
           <path d="M3.33337 8H12.6667" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M8 3.33331L12.6667 7.99998L8 12.6666" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
