@@ -9,7 +9,7 @@ export default function Header() {
      <div className="flex items-center gap-3">
 		<Link href="/" className="flex items-center gap-3">
 			<Image
-				src="/codewave_logo.png"
+				src="/icons/codewave_logo.png"
 				alt="CodeWave Logo"
 				width={58}
 				height={58}
