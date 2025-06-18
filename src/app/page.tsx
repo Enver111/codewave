@@ -6,6 +6,8 @@ import Services from "./components/services";
 import Portfolio from "./components/portfolio";
 import Technologies from "./components/technologies";
 import Price from "./components/price";
+import Contacts from "./components/contacts";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -17,6 +19,8 @@ export default function Home() {
         <Portfolio />
         <Technologies />
         <Price />
+        <Contacts />
+        <Footer />
       </main>
     </div>
   );
