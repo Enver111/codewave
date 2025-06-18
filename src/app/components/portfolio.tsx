@@ -25,7 +25,7 @@ export default function Portfolio() {
         <div className="text-center">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
           >
             Показать все работы
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
