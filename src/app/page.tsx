@@ -7,6 +7,7 @@ import Portfolio from "./components/portfolio";
 import Technologies from "./components/technologies";
 import Price from "./components/price";
 import Contacts from "./components/contacts";
+import Reviews from "./components/reviews";
 import Footer from "./components/footer";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <Technologies />
         <Price />
         <Contacts />
+        <Reviews limit={6} showAllLink={true} />
         <Footer />
 
       </main>
