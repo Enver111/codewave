@@ -8,7 +8,7 @@ export default function Subheader() {
      <section className="flex flex-col md:flex-row justify-between items-center px-12 mt-16 gap-12">
         <div className="max-w-xl">
           <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
-            <span className="text-yellow-500/25 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">CodeWave —</span> <br />мощь веб-решений
+            <span className="text-yellow-500/25 bg-gradient-to-r from-yellow-500 to-orange-500 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">CodeWave —</span> <br />мощь веб-решений
           </h1>
           <p className="text-lg text-neutral-300 mb-8">
             Создаем современные и эффективные веб-сайты и приложения, которые двигают бизнес вперед.
