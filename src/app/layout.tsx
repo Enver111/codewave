@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "CodeWave",
   description: "CodeWave",
   icons: {
-    icon: "/icons/codewave_logo.png",
+    icon: "/icons/codewave_logo.svg",
   },
 };
 
