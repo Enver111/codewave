@@ -1,24 +1,31 @@
 "use client";
-import { useEffect, useState } from "react";
 
-export default function Loader() {
-  const [visible, setVisible] = useState(true);
+interface LoaderProps {
+  loading: boolean;
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 4000); // 4 сек
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!visible) return null;
+export default function Loader({ loading }: LoaderProps) {
+  if (!loading) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0e1a] bg-opacity-95 transition-opacity duration-700" style={{animation: 'fadeOut 0.7s 3.4s forwards'}}>
-      <style>{`
-        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
-      `}</style>
-      <div className="w-full max-w-xl">
-        <img src="/icon.svg" alt="Loading..." className="w-full h-auto animate-pulse" />
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0e1a]">
+      <div className="w-full max-w-md px-8">
+        <img src="/icon.svg" alt="Loading..." className="w-full h-auto" />
       </div>
+      <div className="w-full max-w-sm h-2 bg-gray-800 rounded-full overflow-hidden mt-8">
+        <div
+          className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+          style={{
+            animation: "loading-progress 2s ease-out forwards",
+          }}
+        ></div>
+      </div>
+      <style>{`
+        @keyframes loading-progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }
