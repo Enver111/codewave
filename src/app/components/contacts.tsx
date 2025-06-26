@@ -10,6 +10,7 @@ export default function Contacts() {
 
   return (
     <Container>
+
       <section id="contacts" className="py-20 px-6">
         {/* Header */}
         <div className="text-center mb-16">

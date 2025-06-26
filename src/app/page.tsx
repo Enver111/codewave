@@ -7,21 +7,10 @@ import Portfolio from "./components/portfolio";
 import Technologies from "./components/technologies";
 import Price from "./components/price";
 import Contacts from "./components/contacts";
+import ReviewsServer from "./components/ReviewsServer";
 import Footer from "./components/footer";
+import MainPage from "./MainPage";
 
 export default function Home() {
-  return (
-    <div>
-      <main className="min-h-screen bg-[#0a0e1a] text-white font-sans">
-        <Header />
-        <Subheader />
-        <Services />
-        <Portfolio />
-        <Technologies />
-        <Price />
-        <Contacts />
-        <Footer />
-      </main>
-    </div>
-  );
+  return <MainPage reviews={<ReviewsServer limit={6} showAllLink={true} />} />;
 }
