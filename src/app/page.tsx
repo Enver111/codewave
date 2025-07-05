@@ -5,7 +5,6 @@ import Subheader from "./components/subheader";
 import Services from "./components/services";
 import Portfolio from "./components/portfolio";
 import Technologies from "./components/technologies";
-import Price from "./components/price";
 import Contacts from "./components/contacts";
 import ReviewsServer from "./components/ReviewsServer";
 import Footer from "./components/footer";
