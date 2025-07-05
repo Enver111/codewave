@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Ubuntu, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/app/components/auth/AuthProvider";
 import AppLoader from "./components/AppLoader";
 import { LoadingProvider } from "./context/LoadingContext";
 import { MessageProvider } from "./context/MessageContext";
 
-// iOS-подобный шрифт (используем Inter с оптимизациями)
-const inter = Inter({
+// Основной шрифт - Ubuntu
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-ubuntu",
+  display: "swap",
+});
+
+// Моноширинный шрифт для кода - JetBrains Mono
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -35,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-inter antialiased">
+    <html lang="en" className={`${ubuntu.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-ubuntu antialiased">
         <AuthProvider>
           <LoadingProvider>
             <MessageProvider>

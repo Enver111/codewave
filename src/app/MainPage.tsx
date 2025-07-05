@@ -5,7 +5,7 @@ import Subheader from "./components/subheader";
 import Services from "./components/services";
 import Portfolio from "./components/portfolio";
 import Technologies from "./components/technologies";
-import Price from "./components/price";
+import ElegantServices from "./components/ElegantServices";
 import Contacts from "./components/contacts";
 import Footer from "./components/footer";
 
@@ -22,7 +22,7 @@ export default function MainPage({ reviews }: MainPageProps) {
         <Services />
         <Portfolio />
         <Technologies />
-        <Price />
+        <ElegantServices />
         {reviews}
         <Footer />
       </main>

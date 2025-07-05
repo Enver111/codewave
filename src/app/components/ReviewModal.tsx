@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FaStar, FaTimes } from "react-icons/fa";
-import { createReview } from "@/actions/createReview";
+import { createReview } from "@/actions/reviewActions";
 import { useRouter } from "next/navigation";
 
 interface ReviewModalProps {
