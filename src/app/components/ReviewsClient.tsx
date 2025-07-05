@@ -4,6 +4,7 @@ import { Container } from "./container";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import ReviewActions from "./ReviewActions";
+import ReviewDeleteButton from "./ReviewDeleteButton";
 import { Session } from "next-auth";
 
 interface ReviewsClientProps {
@@ -27,10 +28,17 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 // Using 'any' to bypass persistent typing issues
-const ReviewCard = ({ review }: { review: any }) => (
+const ReviewCard = ({ review, session, onReviewDeleted }: { review: any; session: Session | null; onReviewDeleted?: () => void }) => (
   <div
-    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:border-yellow-500/30"
+    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:border-yellow-500/30 relative"
   >
+    <ReviewDeleteButton
+      reviewId={review.id}
+      reviewAuthorName={review.user.name || "Аноним"}
+      session={session}
+      onReviewDeleted={onReviewDeleted}
+    />
+
     <div className="flex items-center mb-6">
       <Image
         src={review.user.image || `https://i.pravatar.cc/150?u=${review.userId}`}
@@ -53,6 +61,11 @@ const ReviewCard = ({ review }: { review: any }) => (
 export default function ReviewsClient({ reviews, session, limit, showAllLink = false }: ReviewsClientProps) {
   const displayedReviews = limit ? reviews.slice(0, limit) : reviews;
 
+  const handleReviewDeleted = () => {
+    // Обновляем страницу после удаления отзыва
+    window.location.reload();
+  };
+
   return (
     <Container>
       <section id="reviews" className="py-20 px-6">
@@ -68,7 +81,12 @@ export default function ReviewsClient({ reviews, session, limit, showAllLink = f
         {displayedReviews.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayedReviews.map((review: any) => (
-              <ReviewCard key={review.id} review={review} />
+              <ReviewCard
+                key={review.id}
+                review={review}
+                session={session}
+                onReviewDeleted={handleReviewDeleted}
+              />
             ))}
           </div>
         ) : (
