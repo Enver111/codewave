@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        'ubuntu': ['var(--font-ubuntu)', 'sans-serif'],
+        'jetbrains-mono': ['var(--font-jetbrains-mono)', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
