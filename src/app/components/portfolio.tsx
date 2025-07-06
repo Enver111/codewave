@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PortfolioCard } from "./portfoliocard";
 import { allWorks } from '../../../data/portfolio'
 import { useEffect, useState } from "react";
+import Button from "./UI/Button";
 
 export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
@@ -75,13 +76,10 @@ export default function Portfolio() {
         }`}>
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25 font-ubuntu hover-lift"
           >
-            Показать все работы
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-              <path d="M4.16666 10H15.8333" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10 4.16669L15.8333 10L10 15.8334" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <Button>
+              Показать все работы
+            </Button>
           </Link>
         </div>
       </div>
