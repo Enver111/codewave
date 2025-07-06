@@ -46,57 +46,58 @@ export default function Header() {
               CodeWave
             </span>
           </Link>
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center">
             <Link
               href="/#services"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group font-ubuntu"
+              className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
             >
               <span className="relative z-10">Услуги</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link
               href="/portfolio"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group font-ubuntu"
+              className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
             >
               <span className="relative z-10">Портфолио</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link
               href="/reviews"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group font-ubuntu"
+              className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
             >
               <span className="relative z-10">Отзывы</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link
               href="/contacts"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group font-ubuntu"
+              className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
             >
               <span className="relative z-10">Контакты</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
             </Link>
           </nav>
           <div className="flex items-center space-x-4">
             {session ? (
               <>
-                <span className="text-white hidden sm:block font-ubuntu animate-fade-in">
-                  Привет, {session.user?.name?.split(' ')[0] || 'Пользователь'}!
+                <span className="text-yellow-400 hidden sm:block font-ubuntu animate-fade-in">
+                  Привет, {session.user?.name?.split(' ')[0] || 'Пользователь'}
                 </span>
+
                 <Link
                   href="/profile"
-                  className="text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 relative group font-ubuntu"
+                  className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
                 >
-                  <span className="relative z-10">Профиль</span>
-                  <span className="absolute inset-0 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="relative z-10 ">Профиль</span>
+                  <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
                 </Link>
                 {session.user?.role === 'ADMIN' && (
-                  <Link
-                    href="/admin"
+                  <div
                     className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
                   >
                     <span className="relative z-10">Админ</span>
-                    <span className="absolute inset-0 bg-yellow-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  </Link>
+                  </div>
                 )}
                 <MessagesDropdown onUnreadCountChange={handleUnreadCountChange} />
               </>
