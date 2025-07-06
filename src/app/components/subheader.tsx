@@ -2,6 +2,7 @@ import { Container } from "./container";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Button from "./UI/Button";
 
 
 export default function Subheader() {
@@ -53,14 +54,9 @@ export default function Subheader() {
           }`}>
             Создаем современные и эффективные веб-сайты и приложения, которые двигают бизнес вперед.
           </p>
-            <button
-              className={`cursor-pointer inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25 font-cinzel tracking-wider transition-all duration-1000 delay-700 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-              onClick={() => router.push('/order')}
-            >
+            <Button>
             Создать сайт мечты
-          </button>
+            </Button>
         </div>
           <div className={`flex-shrink-0 z-10 transition-all duration-1000 delay-500 ease-out ${
             isVisible ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-[50px] opacity-0 scale-95'
