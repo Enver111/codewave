@@ -54,7 +54,7 @@ export default function Subheader() {
           }`}>
             Создаем современные и эффективные веб-сайты и приложения, которые двигают бизнес вперед.
           </p>
-            <Button>
+            <Button onClick={() => router.push('/order')}>
             Создать сайт мечты
             </Button>
         </div>
