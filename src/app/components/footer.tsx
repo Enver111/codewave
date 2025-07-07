@@ -54,12 +54,16 @@ export default function Footer() {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center animate-glow">
-                <span className="text-white font-bold text-xl">C</span>
-              </div>
-              <span className="text-2xl font-semibold text-yellow-500/25 bg-gradient-to-r from-yellow-500 to-orange-500 via-yellow-100 to-yellow-200 bg-clip-text text-transparent font-ubuntu">
-                CodeWave
-              </span>
+            <Image
+              src="/icons/codewave_logo.svg"
+              alt="CodeWave Logo"
+              width={58}
+              height={58}
+            />
+            <span className="text-2xl font-semibold text-yellow-500/25 bg-gradient-to-r from-yellow-500 to-orange-500
+              via-yellow-100 to-yellow-200 bg-clip-text text-transparent font-ubuntu group-hover:scale-105 transition-transform duration-300">
+              CodeWave
+            </span>
             </div>
             <p className="text-neutral-400 mb-6 font-ubuntu leading-relaxed">
               Создаем современные веб-решения, которые помогают бизнесу расти и развиваться в цифровом мире.
