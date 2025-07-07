@@ -6,6 +6,7 @@ import { FaStar } from "react-icons/fa";
 import ReviewActions from "./ReviewActions";
 import ReviewDeleteButton from "./ReviewDeleteButton";
 import { Session } from "next-auth";
+import Title from "./UI/Title";
 
 interface ReviewsClientProps {
   reviews: any[];
@@ -70,10 +71,8 @@ export default function ReviewsClient({ reviews, session, limit, showAllLink = f
     <Container>
       <section id="reviews" className="py-20 px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
-            Отзывы наших клиентов
-          </h2>
-          <p className="text-gray-300 text-xl max-w-3xl mx-auto">
+          <Title>Отзывы наших клиентов</Title>
+          <p className="text-gray-300 text-xl max-w-3xl mx-auto mt-4 text-lg">
             Мы гордимся своей работой и ценим доверие, которое нам оказывают.
           </p>
         </div>
