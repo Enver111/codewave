@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRocket, FaPalette, FaCode, FaBuilding, FaBrain, FaMagic } from 'react-icons/fa';
 import { Container } from './container';
+import Title from './UI/Title';
 
 interface Service {
   id: string;
@@ -113,10 +114,8 @@ export default function ElegantServices() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
-            Наши услуги
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <Title>Наши услуги</Title>
+          <p className="text-neutral-300 max-w-2xl mx-auto mt-4 text-lg">
             Создаем современные цифровые решения для вашего бизнеса
           </p>
         </motion.div>

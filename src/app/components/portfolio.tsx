@@ -3,6 +3,7 @@ import { PortfolioCard } from "./portfoliocard";
 import { allWorks } from '../../../data/portfolio'
 import { useEffect, useState } from "react";
 import Button from "./UI/Button";
+import Title from "./UI/Title";
 
 export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,24 +35,18 @@ export default function Portfolio() {
 
   return (
     <section className="relative py-24 px-4 md:px-12 overflow-hidden" id="portfolio">
-      {/* Минималистичный фон в стиле дизайна */}
       <div className="absolute inset-0 bg-[#0a0e1a]"></div>
-
-      {/* Тонкие линии для структуры */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
-
-      {/* Минималистичные акценты */}
       <div className="absolute top-16 right-16 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow"></div>
       <div className="absolute bottom-16 left-16 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow delay-1000"></div>
       <div className="absolute top-1/3 left-1/3 w-0.5 h-0.5 bg-yellow-500/20 rounded-full animate-pulse-glow delay-500"></div>
-
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <h2 className="text-4xl font-bold mb-4 font-ubuntu animate-fade-in">Наши работы</h2>
-          <p className="text-neutral-300 max-w-2xl mx-auto font-ubuntu animate-fade-in delay-300">
+          <Title>Наши работы</Title>
+          <p className="text-neutral-300 max-w-2xl mx-auto font-ubuntu animate-fade-in delay-300 text-lg mt-4">
             Реализованные проекты, которые помогли нашим клиентам достичь их бизнес-целей
           </p>
         </div>
