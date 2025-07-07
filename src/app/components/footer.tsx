@@ -134,17 +134,14 @@ export default function Footer() {
           }`}>
             <div className="text-lg font-semibold text-yellow-100 mb-2 font-ubuntu">Мы в соцсетях</div>
             <div className="flex gap-4 mt-2">
-              <a href="https://t.me/codewave" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-blue-500/20 transition group shadow-lg hover:shadow-blue-400/30">
+              <a href="https://t.me/codewave_eo" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-blue-500/20 transition group shadow-lg hover:shadow-blue-400/30">
                 <FaTelegramPlane className="text-2xl text-blue-400 group-hover:scale-125 transition-transform duration-300" />
               </a>
-              <a href="https://instagram.com/codewave" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-pink-500/20 transition group shadow-lg hover:shadow-pink-400/30">
+              <a href="https://instagram.com/codewave.eo" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-pink-500/20 transition group shadow-lg hover:shadow-pink-400/30">
                 <FaInstagram className="text-2xl text-pink-400 group-hover:scale-125 transition-transform duration-300" />
               </a>
-              <a href="https://wa.me/79991234567" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-green-500/20 transition group shadow-lg hover:shadow-green-400/30">
+              <a href="https://wa.me/79780200852" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-green-500/20 transition group shadow-lg hover:shadow-green-400/30">
                 <FaWhatsapp className="text-2xl text-green-400 group-hover:scale-125 transition-transform duration-300" />
-              </a>
-              <a href="https://linkedin.com/company/codewave" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-blue-600/20 transition group shadow-lg hover:shadow-blue-500/30">
-                <FaLinkedin className="text-2xl text-blue-500 group-hover:scale-125 transition-transform duration-300" />
               </a>
             </div>
           </div>
