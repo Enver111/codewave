@@ -36,7 +36,7 @@ export default function Footer() {
     <footer className="relative py-16 px-4 md:px-12 overflow-hidden" id="footer">
 
       <div className="relative z-10">
-        <div className={`grid grid-cols-1 md:grid-cols-4 gap-8 transition-all duration-1000 ease-out ${
+        <div className={`grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center text-center md:justify-items-start md:text-left transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
         }`}>
           {/* Логотип и описание */}
@@ -56,7 +56,7 @@ export default function Footer() {
             </span>
             </div>
             <p className="text-neutral-400 mb-6 font-ubuntu leading-relaxed">
-              Создаем современные веб-решения, которые помогают бизнесу расти и развиваться в цифровом мире.
+              Создаем современные веб-решения, <br />которые помогают бизнесу расти и <br />развиваться в цифровом мире.
             </p>
 
           </div>
@@ -122,8 +122,8 @@ export default function Footer() {
           <div className={`transition-all duration-1000 delay-800 ease-out ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}>
-            <div className="text-lg font-semibold text-yellow-100 mb-2 font-ubuntu">Мы в соцсетях</div>
-            <div className="flex gap-4 mt-2">
+            <div className="text-lg font-semibold text-white mb-2 font-ubuntu">Мы в соцсетях:</div>
+            <div className="flex gap-4 mt-2 justify-center md:justify-start">
               <a href="https://t.me/codewave_eo" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-[#181f2e] hover:bg-blue-500/20 transition group shadow-lg hover:shadow-blue-400/30">
                 <FaTelegramPlane className="text-2xl text-blue-400 group-hover:scale-125 transition-transform duration-300" />
               </a>
@@ -140,11 +140,11 @@ export default function Footer() {
         <div className={`mt-12 pt-8 border-t border-yellow-500/10 transition-all duration-1000 delay-800 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <p className="text-neutral-400 text-sm font-ubuntu">
               © 2025 CodeWave. Все права защищены.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <div className="flex space-x-6 mt-4 md:mt-0 justify-center md:justify-start">
               <Link href="/privacy" className="text-neutral-400 hover:text-yellow-500 transition-colors duration-300 text-sm font-ubuntu">
                 Политика конфиденциальности
               </Link>
