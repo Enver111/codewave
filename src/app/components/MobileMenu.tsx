@@ -5,6 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Session } from "next-auth";
 import { HomeIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, PhoneIcon, UserCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, UserPlusIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import Stripe from "./UI/Stripe";
 
 interface MobileMenuProps {
   open: boolean;
@@ -63,7 +64,7 @@ export default function MobileMenu({ open, onClose, session, signOut }: MobileMe
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#FFD600" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
-        <div className="border-t border-yellow-400/40 mx-2 mb-2" />
+			<Stripe />
         <nav className="flex flex-col gap-2 px-2 py-4">
           <MenuLink href="/#services" onClick={onClose} icon={<BriefcaseIcon className="w-6 h-6 text-yellow-400" />} label="Услуги" />
           <MenuLink href="/portfolio" onClick={onClose} icon={<HomeIcon className="w-6 h-6 text-yellow-400" />} label="Портфолио" />
@@ -81,6 +82,7 @@ export default function MobileMenu({ open, onClose, session, signOut }: MobileMe
             </>
           ) : (
             <>
+			<Stripe />
               <MenuLink href="/login" onClick={onClose} icon={<ArrowRightOnRectangleIcon className="w-6 h-6 text-yellow-400" />} label="Войти" />
               <MenuLink href="/register" onClick={onClose} icon={<UserPlusIcon className="w-6 h-6 text-yellow-400" />} label="Регистрация" />
             </>

@@ -15,7 +15,7 @@ export default function Subheader() {
 
   return (
     <div
-      className="relative w-full overflow-hidden min-h-[400px] mt-16 pt-16 pb-16"
+      className="relative w-full overflow-hidden min-h-[400px] mt-16  pb-16"
       style={{
         backgroundImage: "url('/images/background.png')",
         backgroundSize: 'cover',

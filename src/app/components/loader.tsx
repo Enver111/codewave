@@ -9,10 +9,10 @@ export default function Loader({ loading }: LoaderProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0e1a]">
-      <div className="w-full max-w-md px-8">
-        <img src="/icon.svg" alt="Loading..." className="w-full h-auto" />
+      <div className="w-full max-w-md px-8 flex justify-center">
+        <img src="/icon.svg" alt="Loading..." className="w-40 h-20 object-contain" />
       </div>
-      <div className="w-full max-w-sm h-2 bg-gray-800 rounded-full overflow-hidden mt-8">
+      <div className="w-40 h-2 bg-gray-800 rounded-full overflow-hidden mt-8">
         <div
           className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
           style={{

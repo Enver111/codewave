@@ -46,6 +46,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const MAX_LENGTH = 400;
 
   if (!isOpen) return null;
 
@@ -53,6 +54,10 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     e.preventDefault();
     if (rating === 0 || !text) {
       setError("Пожалуйста, выберите оценку и напишите отзыв.");
+      return;
+    }
+    if (text.length > MAX_LENGTH) {
+      setError(`Максимальная длина отзыва — ${MAX_LENGTH} символов.`);
       return;
     }
     setError("");
@@ -95,12 +100,20 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             <textarea
               id="text"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.length <= MAX_LENGTH) {
+                  setText(e.target.value);
+                } else {
+                  setText(e.target.value.slice(0, MAX_LENGTH));
+                }
+              }}
               rows={5}
+              maxLength={MAX_LENGTH}
               className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
               placeholder="Расскажите о вашем опыте работы с нами..."
               required
             ></textarea>
+            <div className="text-right text-xs text-gray-400 mt-1">{text.length} / {MAX_LENGTH}</div>
           </div>
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <div className="text-center pt-4">

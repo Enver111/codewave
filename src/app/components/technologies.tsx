@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import Title from "./UI/Title";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import './services-swiper.css';
 
 export default function Technologies() {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,7 +46,7 @@ export default function Technologies() {
   ];
 
   return (
-    <section className="relative py-24 px-4 md:px-12 overflow-hidden" id="technologies">
+    <section className="relative py-16 px-4 md:px-12 overflow-hidden" id="technologies">
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${
@@ -53,8 +57,37 @@ export default function Technologies() {
             Используем современный стек технологий для создания качественных и масштабируемых решений
           </p>
         </div>
-
-        <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out ${
+        {/* Мобильный автосвайпер */}
+        <div className="md:hidden pb-2">
+          <Swiper
+            modules={[Autoplay]}
+            loop={true}
+            autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+            speed={3500}
+            slidesPerView={'auto'}
+            spaceBetween={16}
+            allowTouchMove={false}
+            className="w-full"
+          >
+            {technologies.concat(technologies).map((tech, index) => (
+              <SwiperSlide key={index} className="!w-[180px]">
+                <div className="group p-6 rounded-xl border border-yellow-500/10 bg-white/5 backdrop-blur-sm transition-all duration-500 ease-out flex flex-col items-center">
+                  <div className="text-3xl mb-3">
+                    {tech.icon}
+                  </div>
+                  <h3 className="font-semibold text-white mb-1 font-ubuntu">
+                    {tech.name}
+                  </h3>
+                  <p className="text-sm text-neutral-400 font-ubuntu">
+                    {tech.category}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        {/* Десктопная сетка */}
+        <div className={`hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
         }`}>
           {technologies.map((tech, index) => (

@@ -1,0 +1,11 @@
+/* Swiper pagination bullets gold style */
+.swiper-pagination-bullet {
+  background: #ffe066 !important;
+  opacity: 0.6;
+  transition: background 0.2s, opacity 0.2s;
+}
+.swiper-pagination-bullet-active {
+  background: #ffd600 !important;
+  opacity: 1;
+  box-shadow: 0 0 6px #ffd60066;
+}
