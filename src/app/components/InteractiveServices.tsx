@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FaRocket, FaPalette, FaCode, FaBuilding, FaBrain, FaMagic } from 'react-icons/fa';
 import { Container } from './container';
+import Title from './UI/Title';
 
 interface Service {
   id: string;
@@ -119,219 +119,190 @@ export default function InteractiveServices() {
   const selectedServiceData = services.find(s => s.id === selectedService);
 
   return (
-    <Container>
-      <section ref={containerRef} className="py-24 px-6 relative overflow-hidden">
-        {/* Анимированный фон */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-green-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+    <section ref={containerRef} className="relative py-24 px-4 md:px-12 overflow-hidden" id="interactive-services">
+      {/* Фоновые элементы как в других компонентах */}
+      <div className="absolute inset-0 bg-[#0a0e1a]"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
+      <div className="absolute top-24 right-24 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow"></div>
+      <div className="absolute bottom-24 left-24 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow delay-1000"></div>
+      <div className="absolute top-1/2 right-1/4 w-0.5 h-0.5 bg-yellow-500/20 rounded-full animate-pulse-glow delay-500"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Заголовок */}
+        <div className={`text-center mb-16 transition-all duration-1000 ease-out ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <Title>Выберите свой проект</Title>
+          <p className="text-neutral-300 max-w-3xl mx-auto font-ubuntu animate-fade-in delay-300 text-lg mt-4">
+            Выберите услугу и погрузитесь в мир инновационных решений
+          </p>
         </div>
 
-        <div className="relative z-10">
-          {/* Заголовок */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
-              Наши Услуги
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Выберите услугу и погрузитесь в мир инновационных решений
-            </p>
-          </motion.div>
-
-          {/* Интерактивная сетка услуг */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  rotateY: 5,
-                  z: 50
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="relative group cursor-pointer"
-                onMouseEnter={() => setHoveredService(service.id)}
-                onMouseLeave={() => setHoveredService(null)}
-                onClick={() => setSelectedService(service.id)}
-              >
-                {/* Карточка услуги */}
-                <div className={`
-                  relative bg-gradient-to-br from-gray-800/50 to-gray-900/50
-                  backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8
-                  transform transition-all duration-500 group-hover:border-yellow-500/50
-                  ${selectedService === service.id ? 'border-yellow-500/50 shadow-2xl shadow-yellow-500/25' : ''}
-                  ${hoveredService === service.id ? 'shadow-2xl shadow-yellow-500/25' : ''}
-                `}>
-                  {/* Сложность */}
-                  <div className="absolute top-4 right-4 flex gap-1">
-                    {[...Array(7)].map((_, i) => (
-                      <div
-                        key={i}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          i < service.complexity
-                            ? 'bg-yellow-500'
-                            : 'bg-gray-600'
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Иконка */}
-                  <motion.div
-                    className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.gradient} p-4 mb-6 flex items-center justify-center text-white`}
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    {service.icon}
-                  </motion.div>
-
-                  {/* Контент */}
-                  <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-400 mb-4 leading-relaxed">{service.description}</p>
-
-                  {/* Цена и длительность */}
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-yellow-400 font-semibold">{service.price}</span>
-                    <span className="text-gray-500 text-sm">{service.duration}</span>
-                  </div>
-
-                  {/* Особенности */}
-                  <div className="space-y-2">
-                    {service.features.slice(0, 2).map((feature, i) => (
-                      <div key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                        <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Эффект свечения */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500/0 to-orange-500/0 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Детальная информация о выбранной услуге */}
-          <AnimatePresence>
-            {selectedServiceData && (
-              <motion.div
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 50, scale: 0.9 }}
-                transition={{ duration: 0.6 }}
-                className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-8 shadow-2xl shadow-yellow-500/25"
-              >
-                <div className="grid lg:grid-cols-2 gap-8">
-                  {/* Левая колонка */}
-                  <div>
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${selectedServiceData.gradient} p-4 flex items-center justify-center text-white`}>
-                        {selectedServiceData.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-3xl font-bold text-white">{selectedServiceData.title}</h3>
-                        <p className="text-gray-400">{selectedServiceData.description}</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="text-xl font-semibold text-white">Что включено:</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {selectedServiceData.features.map((feature, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg"
-                          >
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                            <span className="text-gray-300">{feature}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Правая колонка */}
-                  <div className="flex flex-col justify-center">
-                    <div className="text-center mb-8">
-                      <div className="text-6xl font-bold text-yellow-400 mb-2">
-                        {selectedServiceData.price}
-                      </div>
-                      <div className="text-gray-400 mb-4">
-                        Срок выполнения: <span className="text-white">{selectedServiceData.duration}</span>
-                      </div>
-                      <div className="flex justify-center gap-2 mb-6">
-                        {[...Array(7)].map((_, i) => (
-                          <div
-                            key={i}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                              i < selectedServiceData.complexity
-                                ? 'bg-yellow-500'
-                                : 'bg-gray-600'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25">
-                        Заказать проект
-                      </button>
-                      <button className="w-full bg-gray-800/50 text-gray-300 py-3 rounded-xl font-semibold border border-gray-600 hover:bg-gray-700/50 hover:border-gray-500 transition-all duration-300">
-                        Получить консультацию
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Дополнительная информация */}
-          {!selectedServiceData && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : {}}
-              transition={{ delay: 0.8 }}
-              className="text-center mt-16"
+        {/* Сетка карточек */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 ease-out ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+        }`}>
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className={`group p-6 rounded-xl border border-yellow-500/10 bg-white/5 backdrop-blur-sm transition-all duration-500 ease-out delay-${index * 100} hover:border-yellow-500/30 hover:bg-white/10 hover-lift cursor-pointer ${
+                isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-20 opacity-0 scale-95'
+              } ${selectedService === service.id ? 'border-yellow-500/50 shadow-2xl shadow-yellow-500/25' : ''}`}
+              onMouseEnter={() => setHoveredService(service.id)}
+              onMouseLeave={() => setHoveredService(null)}
+              onClick={() => setSelectedService(service.id)}
             >
-              <p className="text-gray-400 text-lg mb-6">
-                Выберите услугу выше, чтобы узнать подробности и стоимость
-              </p>
-              <div className="flex justify-center gap-4">
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  Простой проект
+              <div className="text-center">
+                {/* Сложность */}
+                <div className="absolute top-4 right-4 flex gap-1">
+                  {[...Array(7)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        i < service.complexity
+                          ? 'bg-yellow-500'
+                          : 'bg-gray-600'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  Средний проект
+
+                {/* Иконка */}
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.gradient} p-4 flex items-center justify-center text-white mx-auto`}>
+                    {service.icon}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  Сложный проект
+
+                {/* Контент */}
+                <h3 className="font-semibold text-white mb-1 font-ubuntu group-hover:text-yellow-400 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400 mb-4 leading-relaxed font-ubuntu">
+                  {service.description}
+                </p>
+
+                {/* Цена и длительность */}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-yellow-400 font-semibold font-ubuntu">{service.price}</span>
+                  <span className="text-gray-500 text-sm font-ubuntu">{service.duration}</span>
+                </div>
+
+                {/* Особенности */}
+                <div className="space-y-2">
+                  {service.features.slice(0, 2).map((feature, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm text-neutral-400 font-ubuntu">
+                      <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+                      {feature}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          )}
+            </div>
+          ))}
         </div>
-      </section>
-    </Container>
+
+        {/* Детальная информация */}
+        {selectedServiceData && (
+          <div className={`mt-16 transition-all duration-1000 delay-500 ease-out ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}>
+            <div className="bg-white/5 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-8 shadow-2xl shadow-yellow-500/25">
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* Левая колонка */}
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${selectedServiceData.gradient} p-4 flex items-center justify-center text-white`}>
+                      {selectedServiceData.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-bold text-white font-ubuntu">{selectedServiceData.title}</h3>
+                      <p className="text-gray-400 font-ubuntu">{selectedServiceData.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="text-xl font-semibold text-white font-ubuntu">Что включено:</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {selectedServiceData.features.map((feature, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg"
+                        >
+                          <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                          <span className="text-gray-300 font-ubuntu">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Правая колонка */}
+                <div className="flex flex-col justify-center">
+                  <div className="text-center mb-8">
+                    <div className="text-6xl font-bold text-yellow-400 mb-2 font-ubuntu">
+                      {selectedServiceData.price}
+                    </div>
+                    <div className="text-gray-400 mb-4 font-ubuntu">
+                      Срок выполнения: <span className="text-white">{selectedServiceData.duration}</span>
+                    </div>
+                    <div className="flex justify-center gap-2 mb-6">
+                      {[...Array(7)].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            i < selectedServiceData.complexity
+                              ? 'bg-yellow-500'
+                              : 'bg-gray-600'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25 font-ubuntu">
+                      Заказать проект
+                    </button>
+                    <button className="w-full bg-gray-800/50 text-gray-300 py-3 rounded-xl font-semibold border border-gray-600 hover:bg-gray-700/50 hover:border-gray-500 transition-all duration-300 font-ubuntu">
+                      Получить консультацию
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Дополнительная информация */}
+        {!selectedServiceData && (
+          <div className={`mt-16 text-center transition-all duration-1000 delay-700 ease-out ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}>
+            <p className="text-gray-400 text-lg mb-6 font-ubuntu">
+              Выберите услугу выше, чтобы узнать подробности и стоимость
+            </p>
+            <div className="flex justify-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-gray-500 font-ubuntu">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                Простой проект
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-500 font-ubuntu">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                Средний проект
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-500 font-ubuntu">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                Сложный проект
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

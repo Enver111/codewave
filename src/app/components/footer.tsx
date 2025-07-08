@@ -34,16 +34,6 @@ export default function Footer() {
   return (
 	<Container>
     <footer className="relative py-16 px-4 md:px-12 overflow-hidden" id="footer">
-      {/* Минималистичный фон в стиле дизайна */}
-      <div className="absolute inset-0 bg-[#0a0e1a]"></div>
-
-      {/* Тонкие линии для структуры */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
-
-      {/* Минималистичные акценты */}
-      <div className="absolute top-12 right-12 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow"></div>
-      <div className="absolute bottom-12 left-12 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow delay-1000"></div>
-      <div className="absolute top-1/2 right-1/3 w-0.5 h-0.5 bg-yellow-500/20 rounded-full animate-pulse-glow delay-500"></div>
 
       <div className="relative z-10">
         <div className={`grid grid-cols-1 md:grid-cols-4 gap-8 transition-all duration-1000 ease-out ${
