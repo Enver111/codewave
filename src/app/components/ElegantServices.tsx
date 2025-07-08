@@ -83,6 +83,7 @@ const services: Service[] = [
 export default function ElegantServices() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -106,7 +107,7 @@ export default function ElegantServices() {
 
   return (
     <Container>
-      <section id="elegant-services" className="py-24 px-6">
+      <section id="elegant-services" className="py-16 px-6">
 
         {/* Заголовок */}
         <motion.div
@@ -121,8 +122,53 @@ export default function ElegantServices() {
           </p>
         </motion.div>
 
-        {/* Сетка услуг */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Мобильный дропдаун */}
+        <div className="md:hidden mb-8 relative z-20">
+          <div className="relative">
+            <button
+              className="w-full flex items-center justify-between bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm border border-yellow-500/30 rounded-xl px-5 py-4 text-white font-semibold text-lg shadow-lg focus:outline-none transition-all duration-300"
+              onClick={() => setDropdownOpen((open) => !open)}
+            >
+              {selectedService
+                ? (
+                  <span className="flex items-center gap-3">
+                    {services.find(s => s.id === selectedService)?.icon}
+                    {services.find(s => s.id === selectedService)?.title}
+                  </span>
+                )
+                : 'Выберите услугу'}
+              <svg className={`w-5 h-5 ml-2 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.ul
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 right-0 mt-2 bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl border border-yellow-500/30 rounded-xl shadow-2xl overflow-hidden z-30"
+                >
+                  {services.map((service) => (
+                    <li
+                      key={service.id}
+                      className={`flex items-center gap-3 px-5 py-4 cursor-pointer transition-all duration-200 hover:bg-yellow-500/10 ${selectedService === service.id ? 'bg-yellow-500/10 text-yellow-400' : 'text-white'}`}
+                      onClick={() => {
+                        setSelectedService(service.id);
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      <span className="w-8 h-8 flex items-center justify-center rounded-lg" style={{ backgroundColor: service.color }}>{service.icon}</span>
+                      <span className="font-medium">{service.title}</span>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Десктопная сетка */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
