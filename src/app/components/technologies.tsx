@@ -43,12 +43,7 @@ export default function Technologies() {
 
   return (
     <section className="relative py-24 px-4 md:px-12 overflow-hidden" id="technologies">
-      <div className="absolute inset-0 bg-[#0a0e1a]"></div>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
-      <div className="absolute top-24 right-24 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow"></div>
-      <div className="absolute bottom-24 left-24 w-1 h-1 bg-yellow-500/30 rounded-full animate-pulse-glow delay-1000"></div>
-      <div className="absolute top-1/2 right-1/4 w-0.5 h-0.5 bg-yellow-500/20 rounded-full animate-pulse-glow delay-500"></div>
+
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'

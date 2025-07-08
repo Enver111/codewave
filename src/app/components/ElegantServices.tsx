@@ -107,6 +107,7 @@ export default function ElegantServices() {
   return (
     <Container>
       <section id="elegant-services" className="py-24 px-6">
+
         {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,7 +115,7 @@ export default function ElegantServices() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <Title>Наши услуги</Title>
+          <Title>Выберите свой проект</Title>
           <p className="text-neutral-300 max-w-2xl mx-auto mt-4 text-lg">
             Создаем современные цифровые решения для вашего бизнеса
           </p>
@@ -128,28 +129,28 @@ export default function ElegantServices() {
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
               className="group cursor-pointer"
               onClick={() => setSelectedService(service.id)}
             >
-              <div className={`
-                relative bg-gradient-to-br from-gray-800/50 to-gray-900/50
-                backdrop-blur-sm border border-gray-700/50 rounded-xl p-6
-                transition-all duration-300 group-hover:border-gray-600/50
-                ${selectedService === service.id ? 'border-gray-500/50 shadow-lg' : ''}
-              `}>
+              <div
+                className={`
+                   bg-gradient-to-br from-gray-800/50 to-gray-900/50
+                  backdrop-blur-sm border border-gray-700/50 rounded-xl p-6
+                  transition-all duration-300
+                  ${(selectedService === service.id ? 'border-yellow-500/30 bg-white/10 -translate-y-1 shadow-2xl shadow-yellow-500/10 scale-105' : '')}
+                  ${selectedService !== service.id ? 'hover:border-yellow-500/30 hover:bg-white/10 hover:-translate-y-1 hover:shadow-2xl hover:shadow-yellow-500/10 hover:scale-105' : ''}
+                `}
+              >
                 {/* Иконка */}
                 <motion.div
-                  className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-white"
+                  className={`w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-white transition-transform duration-300 ${(selectedService === service.id ? 'scale-110' : '')} ${selectedService !== service.id ? 'group-hover:scale-110' : ''}`}
                   style={{ backgroundColor: service.color }}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                 >
                   {service.icon}
                 </motion.div>
-
                 {/* Контент */}
-                <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
+                <h3 className={`text-xl font-semibold text-white mb-2 transition-colors duration-300 ${(selectedService === service.id ? 'text-yellow-400' : '')} ${selectedService !== service.id ? 'group-hover:text-yellow-400' : ''}`}>{service.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{service.description}</p>
 
                 {/* Цена и длительность */}

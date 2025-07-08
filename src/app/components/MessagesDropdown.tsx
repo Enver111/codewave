@@ -262,11 +262,16 @@ export default function MessagesDropdown({ onUnreadCountChange }: MessagesDropdo
 
       {/* iOS-подобная анимация выпадающего списка */}
       <div
-        className={`absolute right-0 mt-2 w-96 bg-[#101629] border border-gray-700 rounded-2xl shadow-2xl z-50 transform transition-all duration-300 ease-out ${
-          isOpen
-            ? 'opacity-100 scale-100 translate-y-0'
-            : 'opacity-0 scale-95 translate-y-2 pointer-events-none'
-        }`}
+        className={`
+          ${isOpen ? 'z-50' : ''}
+          w-[95vw] max-w-sm left-1/2 -translate-x-1/2 top-20 fixed sm:absolute sm:right-0 sm:left-auto sm:translate-x-0 sm:w-96 sm:top-auto mt-0
+          bg-[#101629] border border-gray-700 rounded-2xl shadow-2xl transform transition-all duration-300 ease-out
+          ${
+            isOpen
+              ? 'opacity-100 scale-100 translate-y-0'
+              : 'opacity-0 scale-95 translate-y-2 pointer-events-none'
+          }
+        `}
         style={{
           transformOrigin: 'top right'
         }}
