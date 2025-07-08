@@ -4,9 +4,15 @@ import { allWorks } from '../../../data/portfolio'
 import { useEffect, useState } from "react";
 import Button from "./UI/Button";
 import Title from "./UI/Title";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import './services-swiper.css';
 
 export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
+  const [swiperRef, setSwiperRef] = useState<any>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,7 +40,7 @@ export default function Portfolio() {
   const featuredWorks = allWorks.slice(0, 4);
 
   return (
-    <section className="relative py-24 px-4 md:px-12 overflow-hidden" id="portfolio">
+    <section className="relative py-16 px-4 md:px-12 overflow-hidden" id="portfolio">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -44,8 +50,32 @@ export default function Portfolio() {
             Реализованные проекты, которые помогли нашим клиентам достичь их бизнес-целей
           </p>
         </div>
-
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 transition-all duration-1000 ease-out ${
+        {/* Мобильный свайпер */}
+        <div className="md:hidden pb-2">
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={16}
+            slidesPerView={1}
+            centeredSlides={true}
+            pagination={{ clickable: true, el: '.custom-swiper-pagination-portfolio' }}
+            style={{ width: '100%', maxWidth: 400 }}
+            className="w-full flex flex-col items-center mb-2"
+            onSwiper={setSwiperRef}
+          >
+            {featuredWorks.map((work, index) => (
+              <SwiperSlide key={index}>
+                <div className="flex justify-center items-stretch">
+                  <div className="w-full max-w-xs h-[480px] flex items-stretch mx-auto">
+                    <PortfolioCard {...work} />
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="custom-swiper-pagination-portfolio flex justify-center mt-1" />
+        </div>
+        {/* Десктопная сетка */}
+        <div className={`hidden md:grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 transition-all duration-1000 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
         }`}>
           {featuredWorks.map((work, index) => (
