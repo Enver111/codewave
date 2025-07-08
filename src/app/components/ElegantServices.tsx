@@ -114,7 +114,7 @@ export default function ElegantServices() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <Title>Наши услуги</Title>
+          <Title>Выберите свой проект</Title>
           <p className="text-neutral-300 max-w-2xl mx-auto mt-4 text-lg">
             Создаем современные цифровые решения для вашего бизнеса
           </p>
