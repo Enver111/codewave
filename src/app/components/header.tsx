@@ -7,11 +7,14 @@ import { useLoading } from "../context/LoadingContext";
 import { useMessageContext } from "../context/MessageContext";
 import MessagesDropdown from "./MessagesDropdown";
 import { useEffect, useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const { session } = useLoading();
   const { setUnreadCount } = useMessageContext();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +35,7 @@ export default function Header() {
         : 'bg-[#0a0e1a] backdrop-blur-md border-b-yellow-500/10'
     }`}>
       <Container>
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-0 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3 group">
             <Image
               src="/icons/codewave_logo.svg"
@@ -46,6 +49,7 @@ export default function Header() {
               CodeWave
             </span>
           </Link>
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center">
             <Link
               href="/#services"
@@ -77,7 +81,8 @@ export default function Header() {
 
             </Link>
           </nav>
-          <div className="flex items-center space-x-4">
+          {/* Desktop actions */}
+          <div className="hidden md:flex items-center space-x-4">
             {session ? (
               <>
                 <span className="text-yellow-400 hidden sm:block font-ubuntu animate-fade-in">
@@ -119,7 +124,28 @@ export default function Header() {
               </>
             )}
           </div>
+          {/* Mobile actions */}
+          <div className="flex md:hidden items-center gap-2">
+            {session && (
+              <MessagesDropdown onUnreadCountChange={handleUnreadCountChange} />
+            )}
+            <button
+              className="p-2 rounded-md hover:bg-yellow-500/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Открыть меню"
+            >
+              <Bars3Icon className="w-7 h-7 text-yellow-400" />
+            </button>
+          </div>
         </div>
+        {/* Мобильное меню */}
+        <MobileMenu
+          open={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+          session={session}
+          signOut={signOut}
+          handleUnreadCountChange={handleUnreadCountChange}
+        />
       </Container>
     </header>
   );
