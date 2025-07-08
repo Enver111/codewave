@@ -30,6 +30,7 @@ export default function MainPage({ reviews }: MainPageProps) {
         <ElegantServices />
         <Stripe />
         {reviews}
+        <Stripe />
         <Footer />
         <StarrySky />
       </main>
