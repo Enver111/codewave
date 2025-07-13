@@ -10,12 +10,9 @@ import Stripe from "./UI/Stripe";
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
-  session: Session | null;
-  signOut: () => void;
-  handleUnreadCountChange: (count: number) => void;
 }
 
-export default function MobileMenu({ open, onClose, session, signOut }: MobileMenuProps) {
+export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     if (open) setIsVisible(true);
@@ -46,6 +43,8 @@ export default function MobileMenu({ open, onClose, session, signOut }: MobileMe
       >
         <div className="flex items-center justify-between px-6 py-5">
           <div className="flex items-center gap-3 min-w-0">
+            {/* The following block was removed as per the edit hint */}
+            {/*
             {session && (
               <Image
                 src={session.user?.image || "/default-avatar.png"}
@@ -59,6 +58,7 @@ export default function MobileMenu({ open, onClose, session, signOut }: MobileMe
             <span className="text-xl font-semibold text-yellow-400 font-ubuntu truncate max-w-[110px]">
               {session ? session.user?.name?.split(' ')[0] : ''}
             </span>
+            */}
           </div>
           <button onClick={handleClose} aria-label="Закрыть меню" className="p-2 rounded-md hover:bg-yellow-500/10">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#FFD600" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>

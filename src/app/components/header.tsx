@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Modal from "./UI/Modal";
 import Button from "./UI/Button";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -95,6 +96,7 @@ export default function Header() {
         </div>
         {/* Мобильное меню */}
       </Container>
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
       <Modal open={loginModalOpen} onClose={() => setLoginModalOpen(false)}>
         <button
           onClick={() => setLoginModalOpen(false)}
