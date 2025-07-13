@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaRocket, FaPalette, FaCode, FaBuilding, FaBrain, FaMagic } from 'react-icons/fa';
 import { Container } from './container';
 import Title from './UI/Title';
+import Modal from "./UI/Modal";
 
 interface Service {
   id: string;
@@ -84,6 +85,12 @@ export default function ElegantServices() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [formModalOpen, setFormModalOpen] = useState<null | 'order' | 'consult'>(null);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [contact, setContact] = useState({ name: '', email: '', phone: '', comment: '' });
+  const [serviceType, setServiceType] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -276,10 +283,12 @@ export default function ElegantServices() {
                   </div>
 
                   <div className="space-y-4">
-                    <button className="w-full bg-white text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
+                    <button className="w-full bg-white text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+                      onClick={() => { setFormModalOpen('order'); setServiceType(selectedServiceData.title); }}>
                       Заказать проект
                     </button>
-                    <button className="w-full bg-gray-800/50 text-gray-300 py-3 rounded-lg font-semibold border border-gray-600 hover:bg-gray-700/50 transition-colors duration-300">
+                    <button className="w-full bg-gray-800/50 text-gray-300 py-3 rounded-lg font-semibold border border-gray-600 hover:bg-gray-700/50 transition-colors duration-300"
+                      onClick={() => { setFormModalOpen('consult'); setServiceType(selectedServiceData.title + ' (консультация)'); }}>
                       Получить консультацию
                     </button>
                   </div>
@@ -303,6 +312,106 @@ export default function ElegantServices() {
           </motion.div>
         )}
       </section>
+      <Modal open={!!formModalOpen} onClose={() => setFormModalOpen(null)}>
+        <button
+          onClick={() => setFormModalOpen(null)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl font-bold"
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
+          {formModalOpen === 'order' ? 'Заказать проект' : 'Получить консультацию'}
+        </h2>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setIsLoading(true);
+            try {
+              const res = await fetch('/api/send-order-telegram', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  siteType: serviceType,
+                  contact,
+                  comment: contact.comment,
+                })
+              });
+              if (!res.ok) {
+                setErrorModalOpen(true);
+                setTimeout(() => setErrorModalOpen(false), 3000);
+              } else {
+                setSuccessModalOpen(true);
+                setFormModalOpen(null);
+                setContact({ name: '', email: '', phone: '', comment: '' });
+              }
+            } catch (e) {
+              setErrorModalOpen(true);
+              setTimeout(() => setErrorModalOpen(false), 3000);
+            } finally {
+              setIsLoading(false);
+            }
+          }}
+          className="space-y-4 mt-4"
+        >
+          <input
+            type="text"
+            placeholder="Имя"
+            className="w-full px-5 py-3 rounded-full bg-gray-900 border border-gray-700 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 outline-none font-semibold transition-all duration-300"
+            value={contact.name}
+            onChange={e => setContact({ ...contact, name: e.target.value })}
+            required
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            className="w-full px-5 py-3 rounded-full bg-gray-900 border border-gray-700 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 outline-none font-semibold transition-all duration-300"
+            value={contact.email}
+            onChange={e => setContact({ ...contact, email: e.target.value })}
+            required
+          />
+          <input
+            type="tel"
+            placeholder="Телефон"
+            className="w-full px-5 py-3 rounded-full bg-gray-900 border border-gray-700 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 outline-none font-semibold transition-all duration-300"
+            value={contact.phone}
+            onChange={e => setContact({ ...contact, phone: e.target.value })}
+            required
+          />
+          <textarea
+            placeholder="Комментарий"
+            className="w-full px-5 py-3 rounded-2xl bg-gray-900 border border-gray-700 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 outline-none font-semibold transition-all duration-300 min-h-[80px] resize-y"
+            value={contact.comment}
+            onChange={e => setContact({ ...contact, comment: e.target.value })}
+          />
+          <button
+            type="submit"
+            className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold flex items-center justify-center min-w-[160px] disabled:opacity-50"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <svg className="animate-spin h-6 w-6 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+            ) : null}
+            {isLoading ? 'Отправка...' : 'Отправить'}
+          </button>
+        </form>
+      </Modal>
+      <Modal open={successModalOpen} onClose={() => setSuccessModalOpen(false)}>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
+          Заявка отправлена!
+        </h2>
+        <p className="text-lg text-gray-200 mb-2">Спасибо за ваш запрос.</p>
+        <p className="text-sm text-gray-400">С вами скоро свяжутся для уточнения деталей.</p>
+      </Modal>
+      <Modal open={errorModalOpen} onClose={() => setErrorModalOpen(false)}>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-red-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
+          Ой! Неполадки с отправкой
+        </h2>
+        <p className="text-lg text-gray-200 mb-2">Что-то пошло не так. Пожалуйста, попробуйте ещё раз через минуту.</p>
+      </Modal>
     </Container>
   );
 }
