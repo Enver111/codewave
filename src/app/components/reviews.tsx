@@ -1,5 +1,5 @@
-import ReviewsServer from "./ReviewsServer";
+import ReviewsClient from "./ReviewsClient";
 
 export default function Reviews() {
-  return <ReviewsServer showAllLink={false} />;
+  return <ReviewsClient showAllLink={false} reviews={[]} total={0} page={1} pageSize={6} />;
 }

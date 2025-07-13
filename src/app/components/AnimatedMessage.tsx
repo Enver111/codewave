@@ -2,13 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheck, FaCheckDouble, FaTrash } from "react-icons/fa";
-import { Message } from "../types/conversation";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { deleteMessage } from "@/actions/messageActions";
 
 interface AnimatedMessageProps {
-  message: Message;
+  message: any;
   isOwnMessage: boolean;
   isNew?: boolean;
   status?: 'sending' | 'sent' | 'delivered' | 'read';
@@ -88,7 +86,8 @@ export default function AnimatedMessage({
 
       // Иначе используем API (fallback)
       console.log("Using API deletion as fallback");
-      const result = await deleteMessage(message.id);
+      const response = await fetch(`/api/messages/${message.id}`, { method: 'DELETE' });
+      const result = await response.json();
       console.log("Delete result:", result);
 
       if (result.success) {

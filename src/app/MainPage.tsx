@@ -10,9 +10,10 @@ import Contacts from "./components/contacts";
 import Footer from "./components/footer";
 import Stripe from "./components/UI/Stripe";
 import StarrySky from "./components/UI/StarrySky";
+import Reviews from "./components/reviews";
 
 interface MainPageProps {
-  reviews: React.ReactNode;
+  reviews: boolean;
 }
 
 export default function MainPage({ reviews }: MainPageProps) {
@@ -29,7 +30,7 @@ export default function MainPage({ reviews }: MainPageProps) {
         <Stripe />
         <ElegantServices />
         <Stripe />
-        {reviews}
+        <Reviews />
         <Stripe />
         <Footer />
         <StarrySky />
