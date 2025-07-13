@@ -5,6 +5,8 @@ import { useState } from "react";
 import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import Modal from "../components/UI/Modal";
+import { useRouter } from "next/navigation";
 
 // Пример массива макетов
 const templates = [
@@ -65,6 +67,10 @@ export default function OrderPage() {
   const [previewTemplate, setPreviewTemplate] = useState<string | null>(null);
   const [templateSearch, setTemplateSearch] = useState('');
   const [templateTypeFilter, setTemplateTypeFilter] = useState('all');
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // Для финального шага
   const selectedTemplateObj = templates.find(t => t.id === selectedTemplate);
@@ -389,16 +395,68 @@ export default function OrderPage() {
                   Назад
                 </button>
                 <button
-                  className="bg-green-500 text-white px-6 py-2 rounded-lg font-semibold"
-                  onClick={() => alert('Заявка отправлена!')}
+                  className="bg-green-500 text-white px-6 py-2 rounded-lg font-semibold flex items-center justify-center min-w-[160px] disabled:opacity-50"
+                  onClick={async () => {
+                    setIsLoading(true);
+                    try {
+                      const res = await fetch('/api/send-order-telegram', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          siteType: selectedSiteTypeObj?.name,
+                          template: selectedTemplateObj?.name,
+                          contact,
+                          comment,
+                        })
+                      });
+                      if (!res.ok) {
+                        setErrorModalOpen(true);
+                        setTimeout(() => setErrorModalOpen(false), 3000);
+                      } else {
+                        setSuccessModalOpen(true);
+                      }
+                    } catch (e: any) {
+                      setErrorModalOpen(true);
+                      setTimeout(() => setErrorModalOpen(false), 3000);
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
+                  disabled={isLoading}
                 >
-                  Отправить заявку
+                  {isLoading ? (
+                    <svg className="animate-spin h-6 w-6 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  ) : null}
+                  {isLoading ? 'Отправка...' : 'Отправить заявку'}
                 </button>
               </div>
             </div>
           )}
         </div>
       </Container>
+      <Modal open={successModalOpen} onClose={() => { setSuccessModalOpen(false); router.push('/'); }}>
+        <button
+          onClick={() => { setSuccessModalOpen(false); router.push('/'); }}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl font-bold"
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
+          Заявка отправлена!
+        </h2>
+        <p className="text-lg text-gray-200 mb-2">Спасибо за ваш заказ.</p>
+        <p className="text-sm text-gray-400">С вами скоро свяжутся для уточнения деталей.</p>
+      </Modal>
+      <Modal open={errorModalOpen} onClose={() => setErrorModalOpen(false)}>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-red-200 via-yellow-100 to-yellow-200 bg-clip-text text-transparent">
+          Ой! Неполадки с отправкой
+        </h2>
+        <p className="text-lg text-gray-200 mb-2">Что-то пошло не так. Пожалуйста, попробуйте ещё раз через минуту.</p>
+      </Modal>
       {/* Кастомная анимация fade-in для карточек и выпадающего списка */}
       <style jsx global>{`
         @keyframes fade-in {
