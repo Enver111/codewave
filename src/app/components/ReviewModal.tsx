@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { FaStar, FaTimes } from "react-icons/fa";
-import { createReview } from "@/actions/reviewActions";
 import { useRouter } from "next/navigation";
 
 interface ReviewModalProps {
@@ -64,7 +63,15 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     setIsSubmitting(true);
 
     try {
-      await createReview({ rating, text });
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rating, text })
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Не удалось отправить отзыв.");
+      }
       // Reset form and close modal
       setText("");
       setRating(0);

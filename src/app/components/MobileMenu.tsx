@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Session } from "next-auth";
-import { HomeIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, PhoneIcon, UserCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, UserPlusIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import Stripe from "./UI/Stripe";
 
@@ -70,23 +70,7 @@ export default function MobileMenu({ open, onClose, session, signOut }: MobileMe
           <MenuLink href="/portfolio" onClick={onClose} icon={<HomeIcon className="w-6 h-6 text-yellow-400" />} label="Портфолио" />
           <MenuLink href="/reviews" onClick={onClose} icon={<ChatBubbleLeftRightIcon className="w-6 h-6 text-yellow-400" />} label="Отзывы" />
           <MenuLink href="/contacts" onClick={onClose} icon={<PhoneIcon className="w-6 h-6 text-yellow-400" />} label="Контакты" />
-          {session ? (
-            <>
-              <MenuLink href="/profile" onClick={onClose} icon={<UserCircleIcon className="w-6 h-6 text-yellow-400" />} label="Профиль" />
-              {session.user?.role === 'ADMIN' && (
-                <MenuLink href="/admin" onClick={onClose} icon={<Cog6ToothIcon className="w-6 h-6 text-yellow-400" />} label="Админ" />
-              )}
-              <button onClick={() => { signOut(); onClose(); }} className="flex items-center gap-3 px-4 py-3 rounded-lg text-lg font-ubuntu text-white hover:bg-yellow-500/10 transition">
-                <ArrowLeftOnRectangleIcon className="w-6 h-6 text-yellow-400" /> Выйти
-              </button>
-            </>
-          ) : (
-            <>
-			<Stripe />
-              <MenuLink href="/login" onClick={onClose} icon={<ArrowRightOnRectangleIcon className="w-6 h-6 text-yellow-400" />} label="Войти" />
-              <MenuLink href="/register" onClick={onClose} icon={<UserPlusIcon className="w-6 h-6 text-yellow-400" />} label="Регистрация" />
-            </>
-          )}
+          {/* Только обычные пункты меню без auth */}
         </nav>
       </div>
     </>
