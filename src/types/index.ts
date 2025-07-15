@@ -1,7 +1,3 @@
-// Export all types from the types directory
-export * from './api';
-
-// Common types that might be used across the application
 export interface AppError {
   message: string;
   code?: string;
@@ -12,14 +8,26 @@ export interface AppError {
   isOperational?: boolean;
 }
 
+export interface Review {
+  id: number;
+  rating: number;
+  comment: string;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  avatar: string;
+}
+
 export interface BaseEntity {
   id: string;
   createdAt: string;
   updatedAt: string;
 }
 
-// Re-export types for convenience
-export type {
+/* export type {
   User,
   AuthResponse,
   LoginRequest,
@@ -43,5 +51,5 @@ export type {
   NewMessageEvent,
   TypingEvent,
   PaginatedResponse,
-  ApiResponse
-} from './api';
+  ApiResponse,
+} from "./api"; */
