@@ -243,7 +243,7 @@ export default function OrderPage() {
                         {paginatedTemplates.map((tpl) => (
                           <div
                             key={tpl.id}
-                            className={`rounded-xl overflow-hidden shadow-lg border-2 cursor-pointer bg-[#181f2e] hover:scale-105 ${
+                            className={`rounded-xl overflow-hidden shadow-lg border-2 cursor-pointer h-[370px] bg-[#181f2e] hover:scale-105 ${
                               selectedTemplate === tpl.id
                                 ? "border-yellow-400"
                                 : "border-transparent"
@@ -261,9 +261,13 @@ export default function OrderPage() {
                                 <span>Индивидуальный макет</span>
                               </div>
                             )}
-                            <div className="p-4">
+                            <div className="p-4 flex flex-col justify-between min-h-[200px] max-h-[200px]">
                               <div className="font-bold text-lg mb-2 transition-colors duration-200">
                                 {tpl.name}
+                              </div>
+
+                              <div className="text-sm text-gray-400 mb-4">
+                                {tpl.description}
                               </div>
                               <div className="flex justify-between">
                                 <button
