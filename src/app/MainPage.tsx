@@ -3,7 +3,7 @@
 import Header from "./components/header";
 import Subheader from "./components/subheader";
 import Services from "./components/services";
-import Portfolio from "./components/portfolio";
+import Blog from "./components/TimelineItem";
 import Technologies from "./components/technologies";
 import ElegantServices from "./components/ElegantServices";
 import Contacts from "./components/contacts";
@@ -24,7 +24,7 @@ export default function MainPage({ reviews }: MainPageProps) {
         <Subheader />
         <Services />
         <Stripe />
-        <Portfolio />
+        <Blog />
         <Stripe />
         <Technologies />
         <Stripe />

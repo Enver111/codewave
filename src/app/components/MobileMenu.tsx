@@ -1,6 +1,7 @@
 "use client";
 import {
   HomeIcon,
+  PaintBrushIcon,
   BriefcaseIcon,
   ChatBubbleLeftRightIcon,
   PhoneIcon,
@@ -80,10 +81,10 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
             label="Услуги"
           />
           <MenuLink
-            href="/portfolio"
+            href="/design"
             onClick={onClose}
-            icon={<HomeIcon className="w-6 h-6 text-yellow-400" />}
-            label="Портфолио"
+            icon={<PaintBrushIcon className="w-6 h-6 text-yellow-400" />}
+            label="Дизайн"
           />
           <MenuLink
             href="/reviews"
