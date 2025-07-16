@@ -4,16 +4,17 @@ import { Container } from "./container";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import Title from "./UI/Title";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import './services-swiper.css';
-import './scrollbar-hide.css';
-import type { PaginatedResponse, Review } from '@/types/api';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+import "./services-swiper.css";
+import "./scrollbar-hide.css";
+import { reviews } from "../../../data/reviews";
+import { Review } from "@/types/index";
 
 interface ReviewsClientProps {
-  reviews: Review[];
+  reviews: typeof reviews;
   limit?: number;
   showAllLink?: boolean;
   total: number;
@@ -34,35 +35,58 @@ const StarRating = ({ rating }: { rating: number }) => {
   );
 };
 
-const CARD_HEIGHT = '20rem';
-const ReviewCard = ({ review, onReviewDeleted, mobile = false }: { review: Review; onReviewDeleted?: () => void; mobile?: boolean }) => (
+const CARD_HEIGHT = "20rem";
+const ReviewCard = ({
+  review,
+  onReviewDeleted,
+  mobile = false,
+}: {
+  review: Review;
+  onReviewDeleted?: () => void;
+  mobile?: boolean;
+}) => (
   <div
     className={`bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8  transform md:hover:-translate-y-2 transition-all duration-300 md:hover:shadow-2xl md:hover:shadow-yellow-500/10 md:hover:border-yellow-500/30 relative flex flex-col h-full`}
-    style={{ width: '20rem', minWidth: '20rem', maxWidth: '20rem', minHeight: CARD_HEIGHT, maxHeight: CARD_HEIGHT, height: CARD_HEIGHT }}
+    style={{
+      width: "20rem",
+      minWidth: "20rem",
+      maxWidth: "20rem",
+      minHeight: CARD_HEIGHT,
+      maxHeight: CARD_HEIGHT,
+      height: CARD_HEIGHT,
+    }}
   >
-
     <div className="flex items-center mb-3" style={{ minHeight: 64 }}>
       <Image
-        src={review.user.image || `https://i.pravatar.cc/150?u=${review.userId}`}
-        alt={review.user.name || "Аноним"}
+        src={review.user.avatar}
+        alt={review.user.name}
         width={48}
         height={48}
         className="rounded-full mr-3 border-2 border-gray-700"
       />
       <div>
         <h4 className="text-base font-semibold text-white">
-          {review.user.name || "Аноним"}
+          {review.user.name}
         </h4>
         <StarRating rating={review.rating} />
       </div>
     </div>
     <div className="flex-1 overflow-y-auto min-h-0 scrollbar-hide">
-      <p className="text-gray-300 leading-relaxed break-words break-all whitespace-pre-line overflow-hidden">{review.text}</p>
+      <p className="text-gray-300 leading-relaxed break-words break-all whitespace-pre-line overflow-hidden">
+        {review.comment}
+      </p>
     </div>
   </div>
 );
 
-export default function ReviewsClient({ reviews: initialReviews = [], limit, showAllLink = false, total: initialTotal, page: initialPage, pageSize: initialPageSize }: ReviewsClientProps) {
+export default function ReviewsClient({
+  reviews: initialReviews = [],
+  limit,
+  showAllLink = false,
+  total: initialTotal,
+  page: initialPage,
+  pageSize: initialPageSize,
+}: ReviewsClientProps) {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [page, setPage] = useState(initialPage);
   const [pageSize] = useState(initialPageSize);
@@ -73,17 +97,17 @@ export default function ReviewsClient({ reviews: initialReviews = [], limit, sho
     if (page === initialPage) return;
     setLoading(true);
     fetch(`/api/reviews?page=${page}&pageSize=${pageSize}`)
-      .then(res => res.json())
-      .then((data: PaginatedResponse<Review>) => {
-        if (data.success) {
-          setReviews(data.data);
-          setTotal(data.meta.total);
-        }
+      .then((res) => res.json())
+      .then((data: Review[]) => {
+        setReviews(data);
+        setTotal(data.length);
       })
       .finally(() => setLoading(false));
   }, [page, pageSize, initialPage]);
 
-  const displayedReviews = limit ? (reviews || []).slice(0, limit) : (reviews || []);
+  const displayedReviews = limit
+    ? (reviews || []).slice(0, limit)
+    : reviews || [];
 
   const handleReviewDeleted = () => {
     window.location.reload();
@@ -109,14 +133,24 @@ export default function ReviewsClient({ reviews: initialReviews = [], limit, sho
                 spaceBetween={16}
                 slidesPerView={1}
                 centeredSlides={true}
-                pagination={{ clickable: true, el: '.custom-swiper-pagination-reviews' }}
-                style={{ width: '100%', maxWidth: 400 }}
+                pagination={{
+                  clickable: true,
+                  el: ".custom-swiper-pagination-reviews",
+                }}
+                style={{ width: "100%", maxWidth: 400 }}
                 className="w-full flex flex-col items-center mb-2"
               >
                 {displayedReviews.map((review: Review) => (
-                  <SwiperSlide key={review.id} className="!flex !justify-center">
+                  <SwiperSlide
+                    key={review.id}
+                    className="!flex !justify-center"
+                  >
                     <div className="w-[20rem] min-w-[20rem] max-w-[20rem] h-80 min-h-80 max-h-80 flex">
-                      <ReviewCard review={review} onReviewDeleted={handleReviewDeleted} mobile />
+                      <ReviewCard
+                        review={review}
+                        onReviewDeleted={handleReviewDeleted}
+                        mobile
+                      />
                     </div>
                   </SwiperSlide>
                 ))}
@@ -150,7 +184,9 @@ export default function ReviewsClient({ reviews: initialReviews = [], limit, sho
             >
               Назад
             </button>
-            <span className="text-gray-300">Страница {page} из {Math.ceil(total / pageSize)}</span>
+            <span className="text-gray-300">
+              Страница {page} из {Math.ceil(total / pageSize)}
+            </span>
             <button
               onClick={() => setPage(page + 1)}
               disabled={page >= Math.ceil(total / pageSize)}

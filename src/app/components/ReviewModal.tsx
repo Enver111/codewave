@@ -8,7 +8,13 @@ interface ReviewModalProps {
   onClose: () => void;
 }
 
-const StarRatingInput = ({ rating, setRating }: { rating: number; setRating: (rating: number) => void }) => {
+const StarRatingInput = ({
+  rating,
+  setRating,
+}: {
+  rating: number;
+  setRating: (rating: number) => void;
+}) => {
   const [hover, setHover] = useState(0);
 
   return (
@@ -38,7 +44,6 @@ const StarRatingInput = ({ rating, setRating }: { rating: number; setRating: (ra
   );
 };
 
-
 export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   const router = useRouter();
   const [text, setText] = useState("");
@@ -66,7 +71,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       const res = await fetch("/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rating, text })
+        body: JSON.stringify({ rating, text }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -78,10 +83,13 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       onClose();
       router.refresh(); // Refresh the page to show the new review
     } catch (err: any) {
-      console.error(err);
+      // Log error only in development
+      if (process.env.NODE_ENV === "development") {
+        console.error("Review submission error:", err);
+      }
       setError(err.message || "Не удалось отправить отзыв.");
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -99,11 +107,18 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Ваша оценка</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Ваша оценка
+            </label>
             <StarRatingInput rating={rating} setRating={setRating} />
           </div>
           <div>
-            <label htmlFor="text" className="block text-sm font-medium text-gray-300 mb-2">Текст отзыва</label>
+            <label
+              htmlFor="text"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Текст отзыва
+            </label>
             <textarea
               id="text"
               value={text}
@@ -120,11 +135,13 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
               placeholder="Расскажите о вашем опыте работы с нами..."
               required
             ></textarea>
-            <div className="text-right text-xs text-gray-400 mt-1">{text.length} / {MAX_LENGTH}</div>
+            <div className="text-right text-xs text-gray-400 mt-1">
+              {text.length} / {MAX_LENGTH}
+            </div>
           </div>
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <div className="text-center pt-4">
-             <button
+            <button
               type="submit"
               disabled={isSubmitting}
               className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
