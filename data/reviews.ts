@@ -6,7 +6,7 @@ export const reviews = [
     user: {
       id: 1,
       name: "Алексей",
-      avatar: "/icons/main_logo.png",
+      avatar: "/icons/user_icon.png",
     },
   },
   {
@@ -17,7 +17,7 @@ export const reviews = [
     user: {
       id: 2,
       name: "Юрий",
-      avatar: "/icons/main_logo.png",
+      avatar: "/icons/user_icon.png",
     },
   },
 ];
