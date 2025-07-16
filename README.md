@@ -1,185 +1,215 @@
-# CodeWave - Full Stack Application
+# 🌊 CodeWave - Веб-студия разработки
 
-A modern full-stack application built with TypeScript, Next.js, Express, and Prisma.
+Современный веб-сайт для компании по разработке веб-решений. Создан с использованием Next.js 14, TypeScript и Tailwind CSS.
 
-## 🏗️ Project Structure
+## ✨ Особенности
+
+- 🎨 **Современный дизайн** - Адаптивный интерфейс с плавными анимациями
+- ⚡ **Высокая производительность** - Оптимизированный Next.js 14 с App Router
+- 📱 **Мобильная адаптация** - Корректное отображение на всех устройствах
+- 🔍 **SEO-оптимизация** - Настроенные метаданные и структурированные данные
+- 🌐 **Интернационализация** - Готовность к многоязычности
+- 📬 **Интеграция с Telegram** - Автоматическая отправка заказов в Telegram
+
+## 🚀 Технологии
+
+- **Framework:** Next.js 14 (App Router)
+- **Язык:** TypeScript
+- **Стилизация:** Tailwind CSS
+- **Анимации:** Framer Motion
+- **Слайдеры:** Swiper.js
+- **Иконки:** React Icons
+- **Формы:** React Hook Form
+- **Шрифты:** Google Fonts (Ubuntu, JetBrains Mono)
+
+## 📁 Структура проекта
 
 ```
 codewave/
-├── src/               # Next.js frontend application
-├── backend/           # Express.js backend API (TypeScript)
-├── database/          # Database migrations and schemas
-├── scripts/           # Utility scripts
-├── public/            # Static assets
-└── data/             # Static data files
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API routes
+│   │   ├── components/        # React компоненты
+│   │   ├── contacts/          # Страница контактов
+│   │   ├── design/           # Страница дизайна
+│   │   ├── order/            # Страница заказа
+│   │   ├── privacy/          # Политика конфиденциальности
+│   │   ├── reviews/          # Страница отзывов
+│   │   ├── services/         # Страница услуг
+│   │   └── terms/            # Пользовательское соглашение
+│   ├── lib/                   # Утилиты
+│   └── types/                 # TypeScript типы
+├── data/                      # Статические данные
+├── public/                    # Статические ресурсы
+│   ├── icons/                # Иконки
+│   └── images/               # Изображения
+└── docs/                     # Документация
 ```
 
-## 🚀 Quick Start
+## 🔧 Установка и запуск
 
-### Prerequisites
+### Предварительные требования
 
 - Node.js 18+
-- npm or yarn
-- PostgreSQL database
+- npm, yarn или pnpm
 
-### Installation
+### Локальная разработка
 
-1. **Clone the repository**
+1. **Клонирование репозитория**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/your-username/codewave.git
    cd codewave
    ```
 
-2. **Install dependencies**
+2. **Установка зависимостей**
+
    ```bash
-   # Install frontend dependencies
    npm install
-
-   # Install backend dependencies
-   cd backend
-   npm install
-   cd ..
+   # или
+   yarn install
+   # или
+   pnpm install
    ```
 
-3. **Set up environment variables**
+3. **Настройка переменных окружения**
+
    ```bash
-   # Copy environment files
-   cp backend/env.example backend/.env
-   cp .env.example .env
+   cp .env.example .env.local
    ```
 
-4. **Set up database**
+4. **Запуск в режиме разработки**
+
    ```bash
-   cd backend
-   npx prisma migrate dev
-   npx prisma generate
-   cd ..
+   npm run dev
+   # или
+   yarn dev
+   # или
+   pnpm dev
    ```
 
-### Development
+5. **Открыть в браузере**
+   - Сайт: http://localhost:3000
 
-**Start frontend:**
+### Продакшн сборка
+
 ```bash
-npm run dev
-```
-
-**Start backend (in separate terminal):**
-```bash
-cd backend
-npm run dev
-```
-
-### Production
-
-**Build frontend:**
-```bash
+# Создание оптимизированной сборки
 npm run build
-```
 
-**Start production server:**
-```bash
+# Запуск продакшн сервера
 npm start
 ```
 
-## 📁 Project Components
+## 🌐 Страницы
 
-### Frontend (`/src`)
-- **Framework:** Next.js 14 with TypeScript
-- **Styling:** Tailwind CSS + shadcn/ui
-- **State Management:** React hooks + Context API
-- **Real-time:** Socket.io client
+- **Главная** (`/`) - Презентация компании и услуг
+- **Услуги** (`/services`) - Подробное описание всех услуг
+- **Портфолио** (`/portfolio`) - Примеры работ
+- **Отзывы** (`/reviews`) - Отзывы клиентов
+- **Контакты** (`/contacts`) - Контактная информация
+- **Заказ** (`/order`) - Форма заказа проекта
+- **Дизайн** (`/design`) - Услуги дизайна
+- **Политика конфиденциальности** (`/privacy`)
+- **Пользовательское соглашение** (`/terms`)
 
-### Backend (`/backend`)
-- **Framework:** Express.js with TypeScript
-- **Database:** Prisma ORM with PostgreSQL
-- **Authentication:** JWT tokens
-- **Real-time:** Socket.io server
-- **Validation:** express-validator
+## 🎨 Компоненты
 
-### Database (`/database`)
-- **ORM:** Prisma
-- **Database:** PostgreSQL
-- **Migrations:** Automatic schema migrations
+### Основные компоненты
 
-## 🌐 Access Points
+- `Header` - Шапка сайта с навигацией
+- `Footer` - Подвал сайта
+- `Services` - Блок услуг с каруселью
+- `Portfolio` - Галерея работ
+- `Reviews` - Отзывы клиентов
+- `Technologies` - Используемые технологии
 
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:5000
-- **API Health Check:** http://localhost:5000/api/health
+### UI компоненты
 
-## 📚 API Endpoints
+- `Button` - Кнопки
+- `Modal` - Модальные окна
+- `Title` - Заголовки
+- `StarrySky` - Анимированный фон
+- `PulsingLoader` - Загрузчик
 
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-- `POST /api/auth/logout` - User logout
+## 📡 API
 
-### Users
-- `GET /api/users` - Get all users (admin)
-- `GET /api/users/:id` - Get user by ID
-- `PUT /api/users/profile` - Update user profile
-- `DELETE /api/users/:id` - Delete user (admin)
+### Эндпоинты
 
-### Conversations
-- `GET /api/conversations` - Get user conversations
-- `GET /api/conversations/:id` - Get conversation by ID
-- `POST /api/conversations` - Create new conversation
-- `PUT /api/conversations/:id` - Update conversation
-- `DELETE /api/conversations/:id` - Delete conversation
+- `POST /api/send-order-telegram` - Отправка заказа в Telegram
 
-### Messages
-- `GET /api/messages/conversation/:conversationId` - Get messages for conversation
-- `POST /api/messages` - Create new message
-- `PUT /api/messages/:id` - Update message
-- `DELETE /api/messages/:id` - Delete message
+### Настройка Telegram Bot
 
-### Reviews
-- `GET /api/reviews` - Get all reviews
-- `GET /api/reviews/:id` - Get review by ID
-- `POST /api/reviews` - Create new review
-- `PUT /api/reviews/:id` - Update review
-- `DELETE /api/reviews/:id` - Delete review
-
-## 🔒 Environment Variables
-
-### Backend (.env)
 ```env
-NODE_ENV=development
-PORT=5000
-DATABASE_URL=postgresql://user:password@localhost:5432/codewave
-JWT_SECRET=your-secret-key
-JWT_EXPIRES_IN=7d
-FRONTEND_URL=http://localhost:3000
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
 ```
 
-### Frontend (.env)
+## 🔒 Переменные окружения
+
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_SOCKET_URL=http://localhost:5000
+# Telegram интеграция
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+TELEGRAM_CHAT_ID=your_telegram_chat_id
+
+# Настройки сайта
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
-## 🛠️ Development Tools
+## 📱 Адаптивность
 
-- **TypeScript** - Type safety across the stack
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **Prisma Studio** - Database GUI
-- **Socket.io** - Real-time communication
+Сайт полностью адаптирован для:
 
-## 📦 Dependencies
+- 📱 Мобильные устройства (320px+)
+- 📱 Планшеты (768px+)
+- 💻 Десктопы (1024px+)
+- 🖥️ Большие экраны (1440px+)
 
-### Frontend
-- Next.js 14
-- React 18
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- Socket.io client
+## 🚀 Деплой
 
-### Backend
-- Express.js
-- TypeScript
-- Prisma
-- Socket.io
-- JWT
+### Vercel (Рекомендуется)
+
+1. Подключить GitHub репозиторий к Vercel
+2. Настроить переменные окружения
+3. Деплой произойдет автоматически
+
+### Другие платформы
+
+- **Netlify** - Поддерживает Next.js
+- **Railway** - Простой деплой
+- **DigitalOcean** - App Platform
+
+## 🛠️ Скрипты
+
+```bash
+# Разработка
+npm run dev
+
+# Сборка
+npm run build
+
+# Запуск продакшн
+npm start
+
+# Линтинг
+npm run lint
+
+# Проверка типов
+npm run type-check
+```
+
+## 📝 Лицензия
+
+Этот проект создан для компании CodeWave. Все права защищены.
+
+## 🤝 Поддержка
+
+Если у вас есть вопросы или предложения:
+
+- 📧 Email: info@codewave.com
+- 💬 Telegram: @codewave_support
+- 🌐 Сайт: https://codewave.com
+
+---
+
+Создано с ❤️ командой CodeWave
