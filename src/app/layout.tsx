@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Ubuntu, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import AppLoader from "./components/AppLoader";
 
 // Основной шрифт - Ubuntu
 const ubuntu = Ubuntu({
@@ -108,9 +107,7 @@ export default function RootLayout({
       lang="ru"
       className={`dark ${ubuntu.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="font-ubuntu antialiased">
-        <AppLoader>{children}</AppLoader>
-      </body>
+      <body className="font-ubuntu antialiased">{children}</body>
     </html>
   );
 }

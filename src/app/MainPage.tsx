@@ -6,19 +6,28 @@ import Services from "./components/services";
 import Blog from "./components/TimelineItem";
 import Technologies from "./components/technologies";
 import ElegantServices from "./components/ElegantServices";
-import Contacts from "./components/contacts";
 import Footer from "./components/footer";
 import Stripe from "./components/UI/Stripe";
 import StarrySky from "./components/UI/StarrySky";
 import Reviews from "./components/reviews";
+import PulsingLoader from "./components/PulsingLoader";
+import { useEffect, useState } from "react";
 
 interface MainPageProps {
   reviews: boolean;
 }
 
 export default function MainPage({ reviews }: MainPageProps) {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div>
+      <PulsingLoader loading={loading} />
       <main className="min-h-screen bg-[#0a0e1a] text-white font-sans">
         <Header />
         <Subheader />
