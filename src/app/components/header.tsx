@@ -49,7 +49,7 @@ export default function Header() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center">
             <Link
-              href="/#services"
+              href="/services"
               className="hover:text-yellow-300 transition-all duration-300 px-4 py-2 relative group font-ubuntu"
             >
               <span className="relative z-10">Услуги</span>

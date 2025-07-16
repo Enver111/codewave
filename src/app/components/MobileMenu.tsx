@@ -75,7 +75,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
         <Stripe />
         <nav className="flex flex-col gap-2 px-2 py-4">
           <MenuLink
-            href="/#services"
+            href="/services"
             onClick={onClose}
             icon={<BriefcaseIcon className="w-6 h-6 text-yellow-400" />}
             label="Услуги"
