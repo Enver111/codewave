@@ -5,18 +5,19 @@ export const reviews = [
     comment: "Отличный сервис! Все сделали быстро и качественно.",
     user: {
       id: 1,
-      name: "Иван Иванов",
-      avatar: "/icons/main_logo.png",
+      name: "Алексей",
+      avatar: "/icons/user_icon.png",
     },
   },
   {
     id: 2,
-    rating: 4,
-    comment: "Хороший сервис, но можно было сделать лучше.",
+    rating: 5,
+    comment:
+      "Все было сделано качественно, быстро. Все пожелания учтены. Сайт получился отличный. А за подробные инструкции,как с ним работать-отдельное огромное спасибо.",
     user: {
       id: 2,
-      name: "Петр Петров",
-      avatar: "/icons/main_logo.png",
+      name: "Юрий",
+      avatar: "/icons/user_icon.png",
     },
   },
 ];

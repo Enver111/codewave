@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Ubuntu, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,6 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://codewave.com"),
   title: {
     default: "CodeWave - Профессиональная веб-разработка",
     template: "%s | CodeWave",
@@ -47,11 +48,6 @@ export const metadata: Metadata = {
     icon: "/icons/codewave_logo.svg",
     shortcut: "/icons/codewave_logo.svg",
     apple: "/icons/codewave_logo.svg",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   robots: {
     index: true,
@@ -95,6 +91,12 @@ export const metadata: Metadata = {
     "theme-color": "#0a0022",
     "msapplication-TileColor": "#0a0022",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
