@@ -72,7 +72,10 @@ const ReviewCard = ({
       </div>
     </div>
     <div className="flex-1 overflow-y-auto min-h-0 scrollbar-hide">
-      <p className="text-gray-300 leading-relaxed break-words break-all whitespace-pre-line overflow-hidden">
+      <p
+        className="text-gray-300 leading-relaxed break-words whitespace-pre-wrap"
+        style={{ overflowWrap: "break-word" }}
+      >
         {review.comment}
       </p>
     </div>
