@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Для создания standalone приложения (важно для Timeweb)
+  output: "standalone",
+
+  // Опционально: если нужно изменить папку сборки
+  // distDir: 'build',
+
+  // Для лучшей совместимости с некоторыми хостингами
+  trailingSlash: true,
+
+  // Настройки изображений
   images: {
     domains: [
       "localhost",
@@ -21,6 +31,8 @@ const nextConfig = {
       },
     ],
   },
+
+  // Настройки безопасности
   async headers() {
     return [
       {
