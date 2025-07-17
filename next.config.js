@@ -1,16 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Для создания standalone приложения (важно для Timeweb)
-  output: "standalone",
-
-  // Опционально: если нужно изменить папку сборки
-  // distDir: 'build',
-
-  // Для лучшей совместимости с некоторыми хостингами
+  // Настройки для статического экспорта
+  output: "export",
   trailingSlash: true,
 
-  // Настройки изображений
   images: {
+    unoptimized: true, // Отключение оптимизации для статического экспорта
     domains: [
       "localhost",
       "hvbyzl0fefqamcq1.public.blob.vercel-storage.com",
@@ -32,7 +27,6 @@ const nextConfig = {
     ],
   },
 
-  // Настройки безопасности
   async headers() {
     return [
       {
