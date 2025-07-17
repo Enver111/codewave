@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Настройки для статического экспорта
-  output: "export",
+  // Настройки для VPS деплоя
+  output: "standalone",
   trailingSlash: true,
 
   images: {
-    unoptimized: true, // Отключение оптимизации для статического экспорта
     domains: [
       "localhost",
       "hvbyzl0fefqamcq1.public.blob.vercel-storage.com",
