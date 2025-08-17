@@ -1,215 +1,69 @@
-# 🌊 CodeWave - Веб-студия разработки
+# React + TypeScript + Vite
 
-Современный веб-сайт для компании по разработке веб-решений. Создан с использованием Next.js 14, TypeScript и Tailwind CSS.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## ✨ Особенности
+Currently, two official plugins are available:
 
-- 🎨 **Современный дизайн** - Адаптивный интерфейс с плавными анимациями
-- ⚡ **Высокая производительность** - Оптимизированный Next.js 14 с App Router
-- 📱 **Мобильная адаптация** - Корректное отображение на всех устройствах
-- 🔍 **SEO-оптимизация** - Настроенные метаданные и структурированные данные
-- 🌐 **Интернационализация** - Готовность к многоязычности
-- 📬 **Интеграция с Telegram** - Автоматическая отправка заказов в Telegram
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🚀 Технологии
+## Expanding the ESLint configuration
 
-- **Framework:** Next.js 14 (App Router)
-- **Язык:** TypeScript
-- **Стилизация:** Tailwind CSS
-- **Анимации:** Framer Motion
-- **Слайдеры:** Swiper.js
-- **Иконки:** React Icons
-- **Формы:** React Hook Form
-- **Шрифты:** Google Fonts (Ubuntu, JetBrains Mono)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 📁 Структура проекта
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-```
-codewave/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── api/               # API routes
-│   │   ├── components/        # React компоненты
-│   │   ├── contacts/          # Страница контактов
-│   │   ├── design/           # Страница дизайна
-│   │   ├── order/            # Страница заказа
-│   │   ├── privacy/          # Политика конфиденциальности
-│   │   ├── reviews/          # Страница отзывов
-│   │   ├── services/         # Страница услуг
-│   │   └── terms/            # Пользовательское соглашение
-│   ├── lib/                   # Утилиты
-│   └── types/                 # TypeScript типы
-├── data/                      # Статические данные
-├── public/                    # Статические ресурсы
-│   ├── icons/                # Иконки
-│   └── images/               # Изображения
-└── docs/                     # Документация
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-## 🔧 Установка и запуск
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### Предварительные требования
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-- Node.js 18+
-- npm, yarn или pnpm
-
-### Локальная разработка
-
-1. **Клонирование репозитория**
-
-   ```bash
-   git clone https://github.com/your-username/codewave.git
-   cd codewave
-   ```
-
-2. **Установка зависимостей**
-
-   ```bash
-   npm install
-   # или
-   yarn install
-   # или
-   pnpm install
-   ```
-
-3. **Настройка переменных окружения**
-
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. **Запуск в режиме разработки**
-
-   ```bash
-   npm run dev
-   # или
-   yarn dev
-   # или
-   pnpm dev
-   ```
-
-5. **Открыть в браузере**
-   - Сайт: http://localhost:3000
-
-### Продакшн сборка
-
-```bash
-# Создание оптимизированной сборки
-npm run build
-
-# Запуск продакшн сервера
-npm start
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-## 🌐 Страницы
-
-- **Главная** (`/`) - Презентация компании и услуг
-- **Услуги** (`/services`) - Подробное описание всех услуг
-- **Портфолио** (`/portfolio`) - Примеры работ
-- **Отзывы** (`/reviews`) - Отзывы клиентов
-- **Контакты** (`/contacts`) - Контактная информация
-- **Заказ** (`/order`) - Форма заказа проекта
-- **Дизайн** (`/design`) - Услуги дизайна
-- **Политика конфиденциальности** (`/privacy`)
-- **Пользовательское соглашение** (`/terms`)
-
-## 🎨 Компоненты
-
-### Основные компоненты
-
-- `Header` - Шапка сайта с навигацией
-- `Footer` - Подвал сайта
-- `Services` - Блок услуг с каруселью
-- `Portfolio` - Галерея работ
-- `Reviews` - Отзывы клиентов
-- `Technologies` - Используемые технологии
-
-### UI компоненты
-
-- `Button` - Кнопки
-- `Modal` - Модальные окна
-- `Title` - Заголовки
-- `StarrySky` - Анимированный фон
-- `PulsingLoader` - Загрузчик
-
-## 📡 API
-
-### Эндпоинты
-
-- `POST /api/send-order-telegram` - Отправка заказа в Telegram
-
-### Настройка Telegram Bot
-
-```env
-TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_CHAT_ID=your_chat_id
-```
-
-## 🔒 Переменные окружения
-
-```env
-# Telegram интеграция
-TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-TELEGRAM_CHAT_ID=your_telegram_chat_id
-
-# Настройки сайта
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
-
-## 📱 Адаптивность
-
-Сайт полностью адаптирован для:
-
-- 📱 Мобильные устройства (320px+)
-- 📱 Планшеты (768px+)
-- 💻 Десктопы (1024px+)
-- 🖥️ Большие экраны (1440px+)
-
-## 🚀 Деплой
-
-### Vercel (Рекомендуется)
-
-1. Подключить GitHub репозиторий к Vercel
-2. Настроить переменные окружения
-3. Деплой произойдет автоматически
-
-### Другие платформы
-
-- **Netlify** - Поддерживает Next.js
-- **Railway** - Простой деплой
-- **DigitalOcean** - App Platform
-
-## 🛠️ Скрипты
-
-```bash
-# Разработка
-npm run dev
-
-# Сборка
-npm run build
-
-# Запуск продакшн
-npm start
-
-# Линтинг
-npm run lint
-
-# Проверка типов
-npm run type-check
-```
-
-## 📝 Лицензия
-
-Этот проект создан для компании CodeWave. Все права защищены.
-
-## 🤝 Поддержка
-
-Если у вас есть вопросы или предложения:
-
-- 📧 Email: info@codewave.com
-- 💬 Telegram: @codewave_support
-- 🌐 Сайт: https://codewave.com
-
----
-
-Создано с ❤️ командой CodeWave
